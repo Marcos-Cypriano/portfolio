@@ -136,6 +136,9 @@ h3, .h3 {
     font-size: 2rem;
   }
 }
+h3.mb-0 {
+  color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity));
+}
 
 h4, .h4 {
   font-size: calc(1.275rem + 0.3vw);
@@ -237,11 +240,11 @@ sup {
 }
 
 a {
-  color: var(--bs-primary);
+  color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity));
   text-decoration: none;
 }
 a:hover {
-  color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity));
+  color: var(--bs-primary);
 }
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
@@ -11436,4 +11439,12 @@ section.resume-section .resume-section-content {
     padding-top: 5rem;
     padding-bottom: 5rem;
   }
+}
+
+span.language.active {
+  display: block;
+}
+
+span.language {
+  display: none;
 }
