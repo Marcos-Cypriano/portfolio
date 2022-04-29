@@ -601,87 +601,84 @@
 
         <!-- Certificator scripts -->
         <script type="text/javascript">
-            // Generate Certificator
-            $('#generateForm').submit(function(event) {
-                const id = $('#user_id').val()
-                const name = $('#user_name').val()
-                var grade = $('#user_grade').val()
-                
-                // Validating input
-                if (!id || !name || !grade) {
-                    alert(`Algum campo está vazio! \nThere is an empty field!`)
-                    location.reload()
-                    return
-                }
-
-                if (grade.indexOf(",") > -1) {
-                    grade = grade.replace(",", ".")
-                }
-
-                if (isNaN(grade)) {
-                    alert("Valor não é numérico \nValue is not a number")
-                    location.reload()
-                    return
-                }
-
-                if (Number(grade) > 10 || Number(grade) < 7) {
-                    alert("Para ser aprovado, necessita de uma nota acima de 7.00 e abaixo de 10.00 \n To pass is needed a grade between 7.00 and 10.00")
-                    location.reload()
-                    return
-                }
-
-                //Creating user JSON and passing to Lambda function
-                const user = {
-                    id,
-                    name,
-                    grade
-                }
+            $(document).ready(function() {
+                // Generate Certificator
+                $('#generateForm').submit(function(event) {
+                    const id = $('#user_id').val()
+                    const name = $('#user_name').val()
+                    var grade = $('#user_grade').val()
+                    
+                    // Validating input
+                    if (!id || !name || !grade) {
+                        alert(`Algum campo está vazio! \nThere is an empty field!`)
+                        return location.href("#certificator_access")
+                    }
     
-                $.ajax({
-                    url: `https://8egg29xcr2.execute-api.us-east-1.amazonaws.com/dev/generateCertificate`,
-                    type: "POST",
-                    data: JSON.stringify(user),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function(result, status, xhr) {
-                        alert(`Sucesso! \nSuccess!`)
-                        var certificate = result.url
-                        window.open(certificate)
-                        return
-                    },
-                    error: function(xhr, status, error) {
-                        const { message, url } = JSON.parse(xhr.responseText)
-                        alert("Error:" + " " + xhr.status + " \n" + message + "\nURL: \n" + url)
-                        location.reload()
-                        return
+                    if (grade.indexOf(",") > -1) {
+                        grade = grade.replace(",", ".")
                     }
+    
+                    if (isNaN(grade)) {
+                        alert("Valor não é numérico \nValue is not a number")
+                        return location.href("#certificator_access")
+                    }
+    
+                    if (Number(grade) > 10 || Number(grade) < 7) {
+                        alert("Para ser aprovado, necessita de uma nota acima de 7.00 e abaixo de 10.00 \n To pass is needed a grade between 7.00 and 10.00")
+                        return location.href("#certificator_access")
+                    }
+    
+                    //Creating user JSON and passing to Lambda function
+                    const user = {
+                        id,
+                        name,
+                        grade
+                    }
+        
+                    $.ajax({
+                        url: `https://8egg29xcr2.execute-api.us-east-1.amazonaws.com/dev/generateCertificate`,
+                        type: "POST",
+                        data: JSON.stringify(user),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function(result, status, xhr) {
+                            alert(`Sucesso! \nSuccess!`)
+                            var certificate = result.url
+                            window.open(certificate)
+                            return
+                        },
+                        error: function(xhr, status, error) {
+                            const { message, url } = JSON.parse(xhr.responseText)
+                            alert("Error:" + " " + xhr.status + " \n" + message + "\nURL: \n" + url)
+                            return location.href("#certificator_access")
+                        }
+                    })
                 })
-            })
-            // Verify Certificator
-            $('#verifyForm').submit(function(event) {
-                const userId = $('#user_id_verify').val()
-
-                if (!userId) {
-                    alert("Id vazio/Empty Id")
-                    location.reload()
-                    return
-                }
-
-                $.ajax({
-                    url: `https://8egg29xcr2.execute-api.us-east-1.amazonaws.com/dev/verifyCertificate/${userId}`,
-                    type: "GET",
-                    dataType: "json",
-                    success: function(result, status, xhr) {
-                        //alert(JSON.stringify(result.url))
-                        var certificate = result.url
-                        window.open(certificate)
-                        return
-                    },
-                    error: function(xhr, status, error) {
-                        alert("Error:" + " " + xhr.status + " " + xhr.responseText)
-                        location.reload()
-                        return
+                // Verify Certificator
+                $('#verifyForm').submit(function(event) {
+                    const userId = $('#user_id_verify').val()
+    
+                    if (!userId) {
+                        alert("Id vazio! Empty Id!")
+                        return location.href("#certificator_access")
                     }
+    
+                    $.ajax({
+                        url: `https://8egg29xcr2.execute-api.us-east-1.amazonaws.com/dev/verifyCertificate/${userId}`,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(result, status, xhr) {
+                            //alert(JSON.stringify(result.url))
+                            var certificate = result.url
+                            window.open(certificate)
+                            return
+                        },
+                        error: function(xhr, status, error) {
+                            const { message } = JSON.parse(xhr.responseText)
+                            alert("Error:" + " " + xhr.status + "\n" + message)
+                            return location.href("#certificator_access")
+                        }
+                    })
                 })
             })
         </script>
