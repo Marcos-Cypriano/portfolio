@@ -9,6 +9,8 @@
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Iconify -->
+        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
@@ -78,6 +80,12 @@
                             <a class="nav-link js-scroll-trigger" href="#riddles">
                                 <span id="portugues" class="language active">Charadas de acesso</span>
                                 <span id="english" class="language">Access riddles</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link js-scroll-trigger" href="#certificator_access">
+                                <span id="portugues" class="language active">Acesso ao Certificator</span>
+                                <span id="english" class="language">Certificator access</span>
                             </a>
                         </li>
                     </ul>
@@ -300,7 +308,6 @@
                         <li class="list-inline-item"><i class="fab fa-js-square"></i></li>
                         <li class="list-inline-item"><i class="iconify-inline" data-icon="simple-icons:typescript"></i></li>
                         <li class="list-inline-item"><i class="fab fa-node-js"></i></li>
-                        <li class="list-inline-item"><i class="fab fa-yarn"></i></li>
                         <li class="list-inline-item"><i class="iconify-inline" data-icon="bxl:postgresql"></i></li>
                         <li class="list-inline-item"><i class="fab fa-docker"></i></li>
                     </ul>
@@ -313,8 +320,10 @@
                         </span>
                     </div>
                     <ul class="list-inline dev-icons">
+                        <li class="list-inline-item"><i class="fab fa-yarn"></i></li>
                         <li class="list-inline-item"><i class="fab fa-npm"></i></li>
                         <li class="list-inline-item"><i class="fab fa-aws"></i></li>
+                        <li class="list-inline-item"><i class="iconify-inline" data-icon="simple-icons:awslambda"></i></li>
                         <li class="list-inline-item"><i class="iconify-inline" data-icon="bxl:heroku"></i></li>
                         <li class="list-inline-item"><i class="fab fa-python"></i></li>
                         <li class="list-inline-item"><i class="iconify-inline" data-icon="bxl:flask"></i></li>
@@ -429,7 +438,7 @@
                                 <i class="iconify-inline" data-icon="simple-icons:typescript"></i>
                                 <i class="fab fa-node-js"></i>
                                 <i class="iconify-inline" data-icon="bxl:postgresql"></i>
-                                <i class="list-inline-item"><i class="fab fa-aws"></i>
+                                <i class="list-inline-item" class="fab fa-aws"></i>
                             </div>
                             <div>
                                 <span id="portugues" class="language active">
@@ -449,6 +458,38 @@
                                 </span>
                                 <span id="english" class="language">
                                     February 2022 - April 2022
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0"> <a href="#certificator_access">Certificator</a></h3>
+                            <div class="subheading mb-3">
+                                Serverless App - 
+                                <i class="iconify-inline" data-icon="simple-icons:typescript"></i>
+                                <i class="fab fa-node-js"></i>
+                                <i class="list-inline-item" class="fab fa-aws"></i>
+                                <i class="iconify-inline" data-icon="simple-icons:awslambda"></i>
+                            </div>
+                            <div>
+                                <span id="portugues" class="language active">
+                                    Caso de estudo de serverless utilizando Typescrpt, Nodejs e AWS Lambda.
+                                    A proposta era de criar um gerador de certificados em pdf como uma função serverless.
+                                </span>
+                                <span id="english" class="language">
+                                    Serverless study case using Typescript, Nodejs and AWS Lambda.
+                                    The goal was to create a serverless function to generate pdf certificate files.
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <span class="text-primary">
+                                <span id="portugues" class="language active">
+                                    Abril 2022 - Abril 2022
+                                </span>
+                                <span id="english" class="language">
+                                    April 2022 - April 2022
                                 </span>
                             </span>
                         </div>
@@ -502,14 +543,151 @@
                                 <input type="text" id="rentx_answer">
                             </form>
                         </div>
-                    </div>                    
+                    </div>                   
+                </div>
+            </section>
+            <hr class="m-0" />
+            <!-- Certifcator access -->
+            <section class="resume-section" id="certificator_access">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">
+                        <span id="portugues" class="language active">
+                            Acesso aos serviços do Certificator
+                        </span>
+                        <span id="english" class="language">
+                            Certificator Access
+                        </span>
+                    </h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0"> <a href="https://app-entregator.herokuapp.com/" target="_blank">Generate</a></h3>
+                            <div class="subheading mb-3">
+                                <span id="portugues" class="language active">
+                                    Preencha os campos com os valores e envie para obter o certificado!
+                                </span>
+                                <span id="english" class="language">
+                                    Fill the inputs and send to get your certificate!
+                                </span>
+                            </div>
+                            <form id="generateForm" action="">
+                                <input type="text" id="user_id" placeholder="ID: Qualquer texto/Any text"> <br>
+                                <input type="text" id="user_name" placeholder="Nome/Name"> <br>
+                                <input type="text" id="user_grade" placeholder="Nota/Grade Ex:9.85"> <br>
+                                <input type="submit" value="Submit" name="generateButton" id="generateButton">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0"> <a href="http://18.230.130.176/api-docs" target="_blank">Verify</a></h3>
+                            <div class="subheading mb-3">
+                                <span id="portugues" class="language active">
+                                    Preencha o ID de quem você deseja verificar o certificado!
+                                </span>
+                                <span id="english" class="language">
+                                    Fill with the ID of whom you'd like to see the certificate.
+                                </span>
+                            </div>
+                            <form id="verifyForm" method="get" action="">
+                                <input type="text" id="user_id_verify">
+                                <input type="submit" value="Submit">
+                            </form>
+                        </div>
+                    </div>                   
                 </div>
             </section>
         </div>
 
-        <!-- Riddles -->
+
+        <!-- Certificator scripts -->
+        <script type="text/javascript">
+            // Generate Certificator
+            $('#generateForm').submit(function(event) {
+                const id = $('#user_id').val()
+                const name = $('#user_name').val()
+                var grade = $('#user_grade').val()
+                
+                // Validating input
+                if (!id || !name || !grade) {
+                    alert(`Algum campo está vazio! \nThere is an empty field!`)
+                    location.reload()
+                    return
+                }
+
+                if (grade.indexOf(",") > -1) {
+                    grade = grade.replace(",", ".")
+                }
+
+                if (isNaN(grade)) {
+                    alert("Valor não é numérico \nValue is not a number")
+                    location.reload()
+                    return
+                }
+
+                if (Number(grade) > 10 || Number(grade) < 7) {
+                    alert("Para ser aprovado, necessita de uma nota acima de 7.00 e abaixo de 10.00 \n To pass is needed a grade between 7.00 and 10.00")
+                    location.reload()
+                    return
+                }
+
+                //Creating user JSON and passing to Lambda function
+                const user = {
+                    id,
+                    name,
+                    grade
+                }
+    
+                $.ajax({
+                    url: `https://8egg29xcr2.execute-api.us-east-1.amazonaws.com/dev/generateCertificate`,
+                    type: "POST",
+                    data: JSON.stringify(user),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(result, status, xhr) {
+                        alert(`Sucesso! \nSuccess!`)
+                        var certificate = result.url
+                        window.open(certificate)
+                        return
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Error:" + " " + xhr.status + " " + xhr.responseText)
+                        location.reload()
+                        return
+                    }
+                })
+            })
+            // Verify Certificator
+            $('#verifyForm').submit(function(event) {
+                const userId = $('#user_id_verify').val()
+
+                if (!userId) {
+                    alert("Id vazio/Empty Id")
+                    location.reload()
+                    return
+                }
+
+                $.ajax({
+                    url: `https://8egg29xcr2.execute-api.us-east-1.amazonaws.com/dev/verifyCertificate/${userId}`,
+                    type: "GET",
+                    dataType: "json",
+                    success: function(result, status, xhr) {
+                        //alert(JSON.stringify(result.url))
+                        var certificate = result.url
+                        window.open(certificate)
+                        return
+                    },
+                    error: function(xhr, status, error) {
+                        alert("Error:" + " " + xhr.status + " " + xhr.responseText)
+                        location.reload()
+                        return
+                    }
+                })
+            })
+        </script>
+        <!-- Riddles-->
         <script>
             $(document).ready(function() {
+                // Entregator riddle
                 $("#entregatorForm").submit(function(event) {
                     let answer = $("#entregator_answer").first().val()
     
@@ -520,6 +698,7 @@
                         event.preventDefault()
                     }
                 })
+                // Rentx riddle
                 $("#rentxForm").submit(function(event) {
                     let answer = $("#rentx_answer").first().val()
     
@@ -532,7 +711,6 @@
                 })
             })
         </script>
-
         <!-- Language toggler -->
         <script>
             $(document).ready(function() {
@@ -544,10 +722,7 @@
             });
         </script>
         <!-- Bootstrap core JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-        <!-- Icons -->
-        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>        
         
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
