@@ -648,10 +648,15 @@
                             return
                         },
                         error: function(xhr, status, error) {
-                            const { message, url } = JSON.parse(xhr.responseText)
-                            alert("Error:" + " " + xhr.status + " \n" + message + "\nURL: \n" + url)
+                            if (xhr.status === 406) {
+                                const { message, url } = JSON.parse(xhr.responseText)
+                                alert("Error:" + " " + xhr.status + " \n" + message + "\nURL: \n" + url)
+                                return location.href("#certificator_access")
+                            }
+                            const { message,} = JSON.parse(xhr.responseText)
+                            alert("Error:" + " " + xhr.status + " \n" + message)
                             return location.href("#certificator_access")
-                        }
+                    }
                     })
                 })
                 // Verify Certificator
