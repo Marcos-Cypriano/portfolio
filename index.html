@@ -322,6 +322,7 @@
                     <ul class="list-inline dev-icons">
                         <li class="list-inline-item"><i class="fab fa-yarn"></i></li>
                         <li class="list-inline-item"><i class="fab fa-npm"></i></li>
+                        <i class="iconify-inline" data-icon="simple-icons:serverless"></i>
                         <li class="list-inline-item"><i class="fab fa-aws"></i></li>
                         <li class="list-inline-item"><i class="iconify-inline" data-icon="simple-icons:awslambda"></i></li>
                         <li class="list-inline-item"><i class="iconify-inline" data-icon="bxl:heroku"></i></li>
@@ -469,6 +470,7 @@
                                 Serverless App - 
                                 <i class="iconify-inline" data-icon="simple-icons:typescript"></i>
                                 <i class="fab fa-node-js"></i>
+                                <i class="iconify-inline" data-icon="simple-icons:serverless"></i>
                                 <i class="fab fa-aws"></i>
                                 <i class="iconify-inline" data-icon="simple-icons:awslambda"></i>
                             </div>
@@ -573,7 +575,7 @@
                                 <input type="text" id="user_id" placeholder="ID: uuid"> <br>
                                 <input type="text" id="user_name" placeholder="Nome/Name"> <br>
                                 <input type="text" id="user_grade" placeholder="Nota/Grade Ex:9.85"> <br>
-                                <input type="submit" value="Submit" name="generateButton" id="generateButton">
+                                <input type="submit" value="Submit" form="generateForm">
                             </form>
                         </div>
                     </div>
@@ -590,7 +592,7 @@
                             </div>
                             <form id="verifyForm" method="get" action="">
                                 <input type="text" id="user_id_verify">
-                                <input type="submit" value="Submit">
+                                <input type="submit" value="Submit" form="verifyForm">
                             </form>
                         </div>
                     </div>                   
@@ -600,10 +602,10 @@
 
 
         <!-- Certificator scripts -->
-        <script type="text/javascript">
+        <script>
             $(document).ready(function() {
                 // Generate Certificator
-                $('#generateForm').submit(function(event) {
+                $('#generateForm').submit( (event) => {
                     const id = $('#user_id').val()
                     const name = $('#user_name').val()
                     var grade = $('#user_grade').val()
@@ -628,7 +630,7 @@
                         return location.href("#certificator_access")
                     }
     
-                    //Creating user JSON and passing to Lambda function
+                    //Creating user JSON and passing to Lambda function url through ajax
                     const user = {
                         id,
                         name,
@@ -651,39 +653,35 @@
                             if (xhr.status === 406) {
                                 const { message, url } = JSON.parse(xhr.responseText)
                                 alert("Error:" + " " + xhr.status + " \n" + message + "\nURL: \n" + url)
-                                return location.href("#certificator_access")
+                            } else {
+                                const { message,} = JSON.parse(xhr.responseText)
+                                alert("Error:" + " " + xhr.status + " \n" + message)
                             }
-                            const { message,} = JSON.parse(xhr.responseText)
-                            alert("Error:" + " " + xhr.status + " \n" + message)
-                            return location.href("#certificator_access")
-                    }
-                    })
-                })
-                // Verify Certificator
-                $('#verifyForm').submit(function(event) {
-                    const userId = $('#user_id_verify').val()
-    
-                    if (!userId) {
-                        alert("Id vazio! Empty Id!")
-                        return location.href("#certificator_access")
-                    }
-    
-                    $.ajax({
-                        url: `https://8egg29xcr2.execute-api.us-east-1.amazonaws.com/dev/verifyCertificate/${userId}`,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(result, status, xhr) {
-                            //alert(JSON.stringify(result.url))
-                            var certificate = result.url
-                            window.open(certificate)
-                            return
-                        },
-                        error: function(xhr, status, error) {
-                            const { message } = JSON.parse(xhr.responseText)
-                            alert("Error:" + " " + xhr.status + "\n" + message)
-                            return location.href("#certificator_access")
                         }
                     })
+                    event.preventDefault()
+                })
+                // Verify Certificator
+                $('#verifyForm').submit( (event) => {
+                    const userId = $('#user_id_verify').val()
+    
+                    if (userId) {
+                        $.ajax({
+                            url: `https://8egg29xcr2.execute-api.us-east-1.amazonaws.com/dev/verifyCertificate/${userId}`,
+                            type: "GET",
+                            dataType: "json",
+                            success: (result, status, xhr) => {
+                                window.open(result.url)
+                            },
+                            error: function(xhr, status, error) {
+                                const { message } = JSON.parse(xhr.responseText)
+                                alert("Error:" + " " + xhr.status + "\n" + message)
+                            }
+                        })
+                    } else {
+                        alert("Id vazio! Empty Id!")
+                    }
+                    event.preventDefault()
                 })
             })
         </script>
